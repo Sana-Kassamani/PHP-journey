@@ -85,6 +85,7 @@
         
     }
     public function copy_with($username = null,$password = null, $email = null){
+        //stringify to json then parse back to create deep copy
         $stringified=json_encode($this);
         $new_user = json_decode($stringified);
 
