@@ -58,7 +58,12 @@
 
     }
     public static function validate_email($email){
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+        // checks if email is in form of "any nb, letter or specific special character"@"domain name can have . or - or letters
+        // or numbers"."2 or more alphabetical chars"
+        $regex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
+
+       
+        if(!preg_match($regex,$email))
         {
             echo "Email is not validated\n";
             return false;
@@ -67,6 +72,16 @@
             echo "Email is validated\n";
             return true;
         }
+
+         // if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+        // {
+        //     echo "Email is not validated\n";
+        //     return false;
+        // }
+        // else{
+        //     echo "Email is validated\n";
+        //     return true;
+        // }
         
     }
     public function copy_with($username = null,$password = null, $email = null){
@@ -75,15 +90,30 @@
 
         if($username)
         {
+            
             $new_user->username=$username;
         }
         if($password)
         {
-            $new_user->password=$password;
+            if(User::check_password($password))
+            {
+                $new_user->password=$password;
+            }
+            else{
+                echo "New password $password is not valid\n";
+            }
+            
         }
         if($email)
         {
-            $new_user->email=$email;
+            
+            if(User::validate_email($email))
+            {
+                $new_user->email=$email;
+            }
+            else{
+                echo "New email $email is not valid\n";
+            }
         }
 
         return $new_user;
@@ -108,6 +138,6 @@ echo "\n";
 $new_user=$user->copy_with("","100&&Tuopi00");
 echo json_encode($new_user);
 echo "\n";
-$new_user=$user->copy_with("","","r_b#gmail.com");
+$new_user=$user->copy_with("","","rb.44@hotmail.net");
 echo json_encode($new_user);
 echo "\n";
