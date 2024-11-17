@@ -1,14 +1,12 @@
 <?php 
 
 function mergeSort(&$list, $start, $end){
-
     if($start < $end)
     {
         $mid = intdiv($start+$end,2) ;
         mergeSort($list, $start, $mid);
         mergeSort($list, $mid +1, $end);
         merge($list, $start,$mid,$end);
-
     }
 }
 function merge(&$list,$start,$mid,$end){
@@ -50,9 +48,7 @@ function merge(&$list,$start,$mid,$end){
         $list[$merge_index]=$right_list[$right_index];
         $right_index++;
         $merge_index++;
-
     }
-   
 }
 $list = [2,8,7,4,32,2,5,16];
 echo json_encode([

@@ -15,8 +15,7 @@ class LinkedList{
         $this->head = null;
         $this->tail = null;
         $this->size =0;
-
-      }
+    }
     public function append($data){
         $node = new Node($data);
         if($this->size ==0){
@@ -29,7 +28,6 @@ class LinkedList{
             $this->tail=&$node;
             $this->size=$this->size+1;
         }
-
     }
 
     public function displayWith2Vowels(){
@@ -43,9 +41,7 @@ class LinkedList{
                 if(strpos($curr->data,$char)===0 || strpos($curr->data,$char) )
                 {
                     $count++;
-                }
-                
-                
+                }   
             }
             if($count >=2)
                 {
@@ -65,8 +61,6 @@ class LinkedList{
             $curr=$curr->next;
         }
     }
-
-
 }
 
 $linked_list=new LinkedList();
